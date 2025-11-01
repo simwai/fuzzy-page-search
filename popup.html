@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      width: 200px;
+      padding: 12px;
+      font-family: 'Victor Mono', monospace, sans-serif;
+      background: #2d1b4e;
+      color: #e9d5ff;
+    }
+
+    button {
+      width: 100%;
+      padding: 8px;
+      background: #7c3aed;
+      border: none;
+      border-radius: 4px;
+      color: #f3e8ff;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Victor Mono', monospace, sans-serif;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    button:hover {
+      background: #8b5cf6;
+    }
+
+    #optionsBtn {
+      background: #6d28d9;
+    }
+
+    #optionsBtn:hover {
+      background: #7c3aed;
+    }
+
+    #status {
+      font-size: 12px;
+      text-align: center;
+      color: #c4b5fd;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="toggleBtn">Disable Search</button>
+  <button id="optionsBtn">Options</button>
+  <div id="status">Search is enabled</div>
+  <script src="popup.js"></script>
+</body>
+
+</html>

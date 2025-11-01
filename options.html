@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Victor+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #1a0f2e;
+      color: #e9d5ff;
+      font-family: 'Victor Mono', monospace, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #d8b4fe;
+      font-size: 24px;
+    }
+
+    .global-toggle {
+      background: #7c3aed;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 4px;
+      border: 2px solid #a78bfa;
+    }
+
+    .global-toggle h2 {
+      margin-bottom: 15px;
+      color: #f3e8ff;
+      font-size: 18px;
+    }
+
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #2d1b4e;
+      transition: 0.4s;
+      border-radius: 34px;
+      border: 2px solid #6d28d9;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+
+    input:checked+.slider {
+      background-color: #10b981;
+      border-color: #059669;
+    }
+
+    input:checked+.slider:before {
+      transform: translateX(26px);
+    }
+
+    .global-status {
+      color: #f3e8ff;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .settings-group {
+      background: #2d1b4e;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+      border-left: 3px solid #7c3aed;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #c4b5fd;
+    }
+
+    input[type="number"],
+    input[type="range"],
+    select {
+      width: 100%;
+      padding: 8px;
+      background: #1e1333;
+      border: 1px solid #6d28d9;
+      border-radius: 4px;
+      color: #e9d5ff;
+      font-family: 'Victor Mono', monospace, sans-serif;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 8px;
+      cursor: pointer;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-weight: normal;
+    }
+
+    .slider-value {
+      display: inline-block;
+      background: #6d28d9;
+      padding: 4px 8px;
+      border-radius: 3px;
+      margin-left: 10px;
+      font-size: 12px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #7c3aed;
+      border: none;
+      border-radius: 4px;
+      color: #f3e8ff;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Victor Mono', monospace, sans-serif;
+      font-size: 14px;
+      margin-right: 10px;
+    }
+
+    button:hover {
+      background: #8b5cf6;
+    }
+
+    button.secondary {
+      background: #6d28d9;
+    }
+
+    button.secondary:hover {
+      background: #7c3aed;
+    }
+
+    #status {
+      margin-top: 20px;
+      padding: 10px;
+      background: #10b981;
+      color: white;
+      border-radius: 4px;
+      text-align: center;
+      display: none;
+    }
+
+    .description {
+      font-size: 12px;
+      color: #a78bfa;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="global-toggle">
+    <h2>Global Extension Toggle</h2>
+    <div class="toggle-container">
+      <label class="switch">
+        <input type="checkbox" id="globalEnable" />
+        <span class="slider"></span>
+      </label>
+      <span class="global-status">Extension is <span id="globalStatus">disabled</span> globally</span>
+    </div>
+    <div class="description" style="margin-top: 15px; color: #f3e8ff;">
+      Toggle on/off for all sites. Use the popup button on each site to override this setting for specific pages.
+    </div>
+  </div>
+
+  <h1>Search Settings</h1>
+
+  <div class="settings-group">
+    <label for="threshold">Default Threshold</label>
+    <input type="range" id="threshold" min="0" max="1" step="0.1" value="0.6" />
+    <span class="slider-value" id="thresholdValue">0.6</span>
+    <div class="description">0.0 = loose matching, 1.0 = exact only</div>
+  </div>
+
+  <div class="settings-group">
+    <label for="maxMatches">Maximum Matches</label>
+    <input type="number" id="maxMatches" min="10" max="500" value="100" />
+    <div class="description">
+      Limit results to prevent performance issues on large pages
+    </div>
+  </div>
+
+  <div class="settings-group">
+    <label for="debounce">Debounce Milliseconds</label>
+    <input type="number" id="debounce" min="100" max="1000" value="300" />
+    <div class="description">Delay before clearing search on empty input</div>
+  </div>
+
+  <div class="settings-group">
+    <label for="minLength">Minimum Text Length</label>
+    <input type="number" id="minLength" min="1" max="10" value="2" />
+    <div class="description">Ignore elements with less text</div>
+  </div>
+
+  <div class="settings-group">
+    <label for="maxLength">Maximum Text Length</label>
+    <input type="number" id="maxLength" min="100" max="2000" value="500" />
+    <div class="description">Ignore elements with more text</div>
+  </div>
+
+  <div class="settings-group">
+    <label class="checkbox-label">
+      <input type="checkbox" id="enableLogging" />
+      Enable Console Logging (for debugging)
+    </label>
+    <div class="description">Shows detailed logs in browser console</div>
+  </div>
+
+  <div style="margin-top: 20px">
+    <button id="save">💾 Save Settings</button>
+    <button id="reset" class="secondary">↺ Reset to Defaults</button>
+  </div>
+
+  <div id="status"></div>
+
+  <script src="options.js"></script>
+</body>
+
+</html>
