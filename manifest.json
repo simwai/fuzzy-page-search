@@ -16,7 +16,7 @@
         "<all_urls>"
       ],
       "js": [
-        "content.js"
+        "src/content.ts"
       ],
       "run_at": "document_end"
     }
