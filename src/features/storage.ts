@@ -1,4 +1,4 @@
-import { Configuration, DEFAULT_CONFIGURATION } from "../../shared/types/config";
+import { Configuration, DEFAULT_CONFIGURATION } from "../shared/types/config";
 
 export async function loadConfiguration(): Promise<Configuration> {
 	return new Promise((resolve) => {

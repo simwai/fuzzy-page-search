@@ -1,7 +1,7 @@
-import { loadConfiguration, getSiteOverride } from "./features/storage/storage";
+import { loadConfiguration, getSiteOverride } from "./features/storage";
 import { Logger } from "./shared/utils/logger";
-import { SearchEngine, Match } from "./features/search/searchEngine";
-import { SearchBarUI, injectStyles } from "./features/ui/searchBar";
+import { SearchEngine, Match } from "./features/search/search-engine";
+import { SearchBarUI, injectStyles } from "./features/ui/search-bar";
 import { Configuration } from "./shared/types/config";
 
 class FuzzySearchController {
@@ -135,7 +135,10 @@ class FuzzySearchController {
 		document
 			.querySelectorAll(`.${prefix}-highlight, .${prefix}-current-highlight`)
 			.forEach((el) => {
-				el.classList.remove(`${prefix}-highlight`, `${prefix}-current-highlight`);
+				el.classList.remove(
+					`${prefix}-highlight`,
+					`${prefix}-current-highlight`,
+				);
 			});
 	}
 
