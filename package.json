@@ -1,0 +1,51 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "content.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "biome check src",
+    "format": "biome format --write src && prettier --write src",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "prepare": "husky install",
+    "test:integration": "playwright test src/integration.test.ts",
+    "test:e2e": "playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simwai/fuzzy-page-search.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/simwai/fuzzy-page-search/issues"
+  },
+  "homepage": "https://github.com/simwai/fuzzy-page-search#readme",
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.6",
+    "@crxjs/vite-plugin": "^2.0.0-beta.33",
+    "@playwright/test": "^1.58.2",
+    "@types/chrome": "^0.1.37",
+    "@types/node": "^25.4.0",
+    "husky": "^9.1.7",
+    "jsdom": "^28.1.0",
+    "lint-staged": "^16.3.3",
+    "oxlint": "^1.53.0",
+    "playwright": "^1.58.2",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.18"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "biome check --apply",
+      "prettier --write"
+    ]
+  }
+}
